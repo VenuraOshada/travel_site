@@ -121,6 +121,39 @@ const Home = () => {
     { title: 'Luxury Honeymoon Tour', days: '14 Days', price: '€2,499', highlight: 'Private Villas, Romantic Dinners', img: 'https://images.unsplash.com/photo-1574686008677-22d733db9b3d?q=80&w=800' },
   ];
 
+  const testimonials = [
+    {
+      quote: "An absolutely unforgettable journey! The team at Nordic Safari understood exactly what we wanted as Dutch travelers. The hotels were premium, and our guide was exceptional.",
+      name: "Jan & Sophie",
+      location: "Amsterdam, NL",
+      image: "/reviews/review1.jpg"
+    },
+    {
+      quote: "From active safaris to scenic tea estates, every detail was thought out. The local experts are wonderful, and safety was always a priority. Highly recommend the bespoke packages!",
+      name: "Mark & Laura",
+      location: "Utrecht, NL",
+      image: "/reviews/review2.jpg"
+    },
+    {
+      quote: "Sri Lanka has won our hearts. The combination of beautiful beaches, ancient temples, and amazing train rides was spectacular. Special thanks to our guides!",
+      name: "Sven & Emily",
+      location: "Rotterdam, NL",
+      image: "/reviews/review3.jpg"
+    },
+    {
+      quote: "A perfect mix of comfort and adventure. The train trip through Nanu-Oya tea country was breathtaking. Unrivaled hospitality and delicious local food!",
+      name: "Lars & Charlotte",
+      location: "The Hague, NL",
+      image: "/reviews/review4.jpg"
+    },
+    {
+      quote: "Highly personalized and professional service. The hotels were top-notch and the safari was an incredible highlight. We will definitely come back soon!",
+      name: "Thomas & Anna",
+      location: "Groningen, NL",
+      image: "/reviews/review5.jpg"
+    }
+  ];
+
   // Headline staggered text configuration
   const titleWords1 = "Discover Sri Lanka With".split(" ");
   const titleWords2 = "Nordic Safari On Silk Road".split(" ");
@@ -379,34 +412,49 @@ const Home = () => {
             <p className="text-gray-400 max-w-2xl mx-auto">Hear from Dutch travelers who experienced the magic of Sri Lanka with us.</p>
           </div>
 
-          <div className="max-w-3xl mx-auto" data-cursor="drag">
+          <div className="max-w-4xl mx-auto" data-cursor="drag">
             <Swiper
               effect={'cards'}
               grabCursor={true}
               modules={[EffectCards, Pagination, Autoplay]}
               pagination={{ clickable: true }}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              className="w-full"
+              autoplay={{ delay: 6000, disableOnInteraction: false }}
+              className="w-full animate-fade-in"
             >
-              {[1, 2, 3].map((_, i) => (
-                <SwiperSlide key={i} className="bg-white/10 backdrop-blur-md border border-white/20 p-10 rounded-3xl text-white shadow-2xl">
-                  <div className="flex gap-1 mb-6 text-secondary">
-                    <Star fill="currentColor" />
-                    <Star fill="currentColor" />
-                    <Star fill="currentColor" />
-                    <Star fill="currentColor" />
-                    <Star fill="currentColor" />
-                  </div>
-                  <p className="text-xl md:text-2xl font-light italic leading-relaxed mb-8">
-                    "An absolutely unforgettable journey! The team at Nordic Safari understood exactly what we wanted as Dutch travelers. The hotels were premium, and our guide was exceptional."
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gray-300 rounded-full overflow-hidden">
-                      <img src={`https://i.pravatar.cc/150?img=${i+10}`} alt="User" />
+              {testimonials.map((item, i) => (
+                <SwiperSlide key={i} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl text-white shadow-2xl overflow-hidden min-h-[460px] md:min-h-[380px]">
+                  <div className="flex flex-col md:flex-row h-full">
+                    {/* Left side: Actual traveler trip photo */}
+                    <div className="w-full md:w-5/12 h-60 md:h-[400px] relative overflow-hidden shrink-0">
+                      <img 
+                        src={item.image} 
+                        alt={`Review photo by ${item.name}`} 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-dark/50 z-10"></div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-lg">Jan & Sophie</h4>
-                      <span className="text-sm text-gray-400">Amsterdam, NL</span>
+                    
+                    {/* Right side: Star reviews and testimonials text */}
+                    <div className="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-between">
+                      <div>
+                        <div className="flex gap-1 mb-4 text-secondary">
+                          <Star fill="currentColor" size={18} />
+                          <Star fill="currentColor" size={18} />
+                          <Star fill="currentColor" size={18} />
+                          <Star fill="currentColor" size={18} />
+                          <Star fill="currentColor" size={18} />
+                        </div>
+                        <p className="text-base md:text-lg font-light italic leading-relaxed mb-6 text-gray-100">
+                          "{item.quote}"
+                        </p>
+                      </div>
+                      
+                      <div className="flex items-center gap-4 border-t border-white/10 pt-4 mt-auto">
+                        <div>
+                          <h4 className="font-bold text-lg text-secondary">{item.name}</h4>
+                          <span className="text-sm text-gray-300">{item.location}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>
