@@ -4,7 +4,7 @@ import { Leaf, Users, Map, Heart, Plane, ShieldCheck, Compass, Anchor } from 'lu
 
 const About = () => {
   const timelineRef = useRef(null);
-  
+
   // Track scroll progress of the Silk Road timeline section
   const { scrollYProgress } = useScroll({
     target: timelineRef,
@@ -52,7 +52,7 @@ const About = () => {
           <img src="https://images.unsplash.com/photo-1536697246787-1f276329e6c9?q=80&w=2000" alt="Sri Lanka Tea Fields" className="w-full h-full object-cover" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center pt-20">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
@@ -60,7 +60,7 @@ const About = () => {
           >
             Our Story
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, type: "spring", stiffness: 100, damping: 15 }}
@@ -75,7 +75,7 @@ const About = () => {
       <section className="py-24 bg-white relative z-20 -mt-10 rounded-t-[3rem] shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -90,23 +90,23 @@ const About = () => {
               </p>
             </motion.div>
             <div className="grid grid-cols-2 gap-4">
-              <motion.img 
+              <motion.img
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 8 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                src="https://images.unsplash.com/photo-1560179406-1c6c60e0dc26?q=80&w=600" 
-                alt="Elephants" 
-                className="rounded-2xl shadow-lg w-full h-48 object-cover translate-y-8" 
+                src="https://images.unsplash.com/photo-1714281346649-3594296cc13f?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Elephants"
+                className="rounded-2xl shadow-lg w-full h-48 object-cover translate-y-8"
               />
-              <motion.img 
+              <motion.img
                 initial={{ opacity: 0, y: -40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                src="https://images.unsplash.com/photo-1620608670698-35cb676e100e?q=80&w=600" 
-                alt="Temple" 
-                className="rounded-2xl shadow-lg w-full h-64 object-cover" 
+                src="https://images.unsplash.com/photo-1663403766714-1b43bd155a17?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Temple"
+                className="rounded-2xl shadow-lg w-full h-64 object-cover"
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ const About = () => {
           <div className="relative max-w-5xl mx-auto">
             {/* Scroll-Linked SVG Connector Line */}
             <div className="absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-[3px] bg-gray-100 hidden md:block" />
-            
+
             <div className="absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-[3px] hidden md:block">
               <svg className="absolute top-0 left-0 w-full h-full" style={{ overflow: "visible" }}>
                 <motion.line
@@ -148,7 +148,7 @@ const About = () => {
                 const isEven = idx % 2 === 0;
                 return (
                   <div key={idx} className="flex flex-col md:flex-row items-center relative">
-                    
+
                     {/* Left content (for even indices) */}
                     <div className={`w-full md:w-1/2 flex ${isEven ? 'md:justify-end md:pr-16' : 'md:justify-start md:pl-16 order-last md:order-none'}`}>
                       <motion.div
@@ -180,7 +180,7 @@ const About = () => {
 
                     {/* Right space filler (even) or content (odd) */}
                     <div className="hidden md:block w-1/2" />
-                    
+
                   </div>
                 );
               })}
@@ -204,7 +204,7 @@ const About = () => {
               { icon: <Heart />, title: 'Dutch Focus', desc: 'We understand the preferences, standards, and expectations of Dutch travelers.' },
               { icon: <Map />, title: 'Bespoke Journeys', desc: 'Every itinerary is crafted with attention to detail and personal touch.' }
             ].map((value, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -213,7 +213,7 @@ const About = () => {
                 whileHover={{ y: -8 }}
                 className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-center group cursor-pointer border border-gray-100"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 transition-all duration-300 group-hover:bg-primary group-hover:text-white"
                 >

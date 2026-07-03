@@ -12,7 +12,7 @@ const Packages = () => {
       duration: '7 Days / 6 Nights',
       locations: 'Colombo - Sigiriya - Kandy - Nuwara Eliya - Colombo',
       highlights: ['Sigiriya Rock Fortress', 'Temple of the Tooth', 'Tea Plantations'],
-      image: 'https://images.unsplash.com/photo-1578593139826-6644f07a0c10?auto=format&fit=crop&q=80&w=1200',
+      image: 'https://images.unsplash.com/photo-1665849050332-8d5d7e59afb6?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       price: '€899'
     },
     {
@@ -85,17 +85,17 @@ const Packages = () => {
   return (
     <div className="min-h-screen bg-light pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Page Header */}
         <div className="text-center mb-16 pt-10">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-6xl font-heading font-bold text-dark mb-6"
           >
             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Packages</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -108,11 +108,10 @@ const Packages = () => {
         {/* Tabs with layoutId spring morph slider */}
         <div className="flex justify-center mb-16">
           <div className="bg-white p-1.5 rounded-full shadow-md flex items-center relative">
-            <button 
+            <button
               onClick={() => setActiveTab('curated')}
-              className={`relative z-10 px-8 py-3 rounded-full font-medium text-lg transition-colors duration-350 cursor-pointer ${
-                activeTab === 'curated' ? 'text-white' : 'text-gray-500 hover:text-dark'
-              }`}
+              className={`relative z-10 px-8 py-3 rounded-full font-medium text-lg transition-colors duration-350 cursor-pointer ${activeTab === 'curated' ? 'text-white' : 'text-gray-500 hover:text-dark'
+                }`}
             >
               Curated Tours
               {activeTab === 'curated' && (
@@ -123,11 +122,10 @@ const Packages = () => {
                 />
               )}
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('custom')}
-              className={`relative z-10 px-8 py-3 rounded-full font-medium text-lg transition-colors duration-350 cursor-pointer ${
-                activeTab === 'custom' ? 'text-white' : 'text-gray-500 hover:text-dark'
-              }`}
+              className={`relative z-10 px-8 py-3 rounded-full font-medium text-lg transition-colors duration-350 cursor-pointer ${activeTab === 'custom' ? 'text-white' : 'text-gray-500 hover:text-dark'
+                }`}
             >
               Build Your Own
               {activeTab === 'custom' && (
@@ -170,7 +168,7 @@ const Packages = () => {
                       <h3 className="text-2xl font-heading font-bold text-dark group-hover:text-primary transition-colors duration-300">{pkg.title}</h3>
                       <span className="text-2xl font-bold text-primary">{pkg.price}</span>
                     </div>
-                    
+
                     <div className="flex items-start gap-2 text-gray-600 mb-6">
                       <MapPin size={20} className="text-accent shrink-0 mt-1" />
                       <p>{pkg.locations}</p>
@@ -189,7 +187,7 @@ const Packages = () => {
                       </ul>
                     </div>
 
-                    <motion.button 
+                    <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className="w-full py-4 bg-dark hover:bg-accent text-white rounded-xl font-medium transition-colors shadow-md hover:shadow-xl cursor-pointer"
@@ -216,24 +214,24 @@ const Packages = () => {
                 {/* Form Section */}
                 <div className="p-8 lg:p-12 lg:w-2/3">
                   <h2 className="text-3xl font-heading font-bold text-dark mb-8">Build Your Dream Tour</h2>
-                  
+
                   <div className="space-y-8">
                     {/* Basics */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Duration (Days)</label>
                         <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
-                          <motion.button 
-                            whileTap={{ scale: 0.8 }} 
-                            onClick={() => setCustomForm(p => ({...p, days: Math.max(1, p.days - 1)}))} 
+                          <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => setCustomForm(p => ({ ...p, days: Math.max(1, p.days - 1) }))}
                             className="px-5 py-3 hover:bg-gray-200 transition-colors font-bold cursor-pointer"
                           >
                             -
                           </motion.button>
                           <input type="number" value={customForm.days} readOnly className="w-full text-center bg-transparent font-medium" />
-                          <motion.button 
-                            whileTap={{ scale: 0.8 }} 
-                            onClick={() => setCustomForm(p => ({...p, days: p.days + 1}))} 
+                          <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => setCustomForm(p => ({ ...p, days: p.days + 1 }))}
                             className="px-5 py-3 hover:bg-gray-200 transition-colors font-bold cursor-pointer"
                           >
                             +
@@ -243,17 +241,17 @@ const Packages = () => {
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Travelers</label>
                         <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
-                          <motion.button 
-                            whileTap={{ scale: 0.8 }} 
-                            onClick={() => setCustomForm(p => ({...p, travelers: Math.max(1, p.travelers - 1)}))} 
+                          <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => setCustomForm(p => ({ ...p, travelers: Math.max(1, p.travelers - 1) }))}
                             className="px-5 py-3 hover:bg-gray-200 transition-colors font-bold cursor-pointer"
                           >
                             -
                           </motion.button>
                           <input type="number" value={customForm.travelers} readOnly className="w-full text-center bg-transparent font-medium" />
-                          <motion.button 
-                            whileTap={{ scale: 0.8 }} 
-                            onClick={() => setCustomForm(p => ({...p, travelers: p.travelers + 1}))} 
+                          <motion.button
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => setCustomForm(p => ({ ...p, travelers: p.travelers + 1 }))}
                             className="px-5 py-3 hover:bg-gray-200 transition-colors font-bold cursor-pointer"
                           >
                             +
@@ -272,11 +270,10 @@ const Packages = () => {
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => toggleDestination(dest)}
-                            className={`p-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
-                              customForm.destinations.includes(dest) 
-                                ? 'bg-primary-light/10 border-primary text-primary shadow-sm' 
+                            className={`p-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${customForm.destinations.includes(dest)
+                                ? 'bg-primary-light/10 border-primary text-primary shadow-sm'
                                 : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                            }`}
+                              }`}
                           >
                             {dest}
                           </motion.button>
@@ -293,12 +290,11 @@ const Packages = () => {
                             key={cat}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => setCustomForm({...customForm, hotelCategory: cat})}
-                            className={`py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
-                              customForm.hotelCategory === cat 
-                                ? 'bg-primary-light/10 border-primary text-primary shadow-sm' 
+                            onClick={() => setCustomForm({ ...customForm, hotelCategory: cat })}
+                            className={`py-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${customForm.hotelCategory === cat
+                                ? 'bg-primary-light/10 border-primary text-primary shadow-sm'
                                 : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                            }`}
+                              }`}
                           >
                             {cat}
                           </motion.button>
@@ -309,9 +305,9 @@ const Packages = () => {
                     {/* Special Requests */}
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Special Requests / Interests</label>
-                      <textarea 
-                        className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" 
-                        rows="4" 
+                      <textarea
+                        className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                        rows="4"
                         placeholder="Tell us about any specific activities (e.g., surfing, cooking classes) or dietary requirements..."
                       ></textarea>
                     </div>
@@ -321,7 +317,7 @@ const Packages = () => {
                 {/* Summary Section */}
                 <div className="bg-dark text-white p-8 lg:p-12 lg:w-1/3 flex flex-col">
                   <h3 className="text-2xl font-heading font-bold mb-8 text-secondary">Your Trip Summary</h3>
-                  
+
                   <div className="space-y-6 flex-grow">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-accent"><Clock size={20} /></div>
@@ -356,7 +352,7 @@ const Packages = () => {
                   </div>
 
                   <div className="mt-8 pt-8 border-t border-white/20">
-                    <motion.button 
+                    <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       className="w-full py-4 bg-primary hover:bg-primary-light text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(21,62,53,0.5)] hover:shadow-[0_0_30px_rgba(21,62,53,0.7)] cursor-pointer"
