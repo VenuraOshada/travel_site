@@ -1,9 +1,22 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useRef, FC, ReactElement, cloneElement } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { Leaf, Users, Map, Heart, Plane, ShieldCheck, Compass, Anchor } from 'lucide-react';
 
-const About = () => {
-  const timelineRef = useRef(null);
+interface TimelineStep {
+  icon: ReactElement;
+  title: string;
+  desc: string;
+  location: string;
+}
+
+interface CoreValue {
+  icon: ReactElement;
+  title: string;
+  desc: string;
+}
+
+const About: FC = () => {
+  const timelineRef = useRef<HTMLElement>(null);
 
   // Track scroll progress of the Silk Road timeline section
   const { scrollYProgress } = useScroll({
@@ -17,7 +30,7 @@ const About = () => {
     restDelta: 0.001
   });
 
-  const timelineSteps = [
+  const timelineSteps: TimelineStep[] = [
     {
       icon: <Plane size={22} />,
       title: "From the Netherlands",
@@ -42,6 +55,13 @@ const About = () => {
       desc: "Explore Sigiriya, hike tea hills in Ella, track leopards in Yala, and lounge on beaches in Mirissa. Your dream travel becomes reality.",
       location: "Sigiriya - Kandy - South Coast"
     }
+  ];
+
+  const coreValues: CoreValue[] = [
+    { icon: <Leaf />, title: 'Sustainable Tourism', desc: 'We prioritize eco-friendly accommodations and respect wildlife habitats.' },
+    { icon: <Users />, title: 'Local Expertise', desc: 'Our team comprises native Sri Lankans ensuring authentic experiences.' },
+    { icon: <Heart />, title: 'Dutch Focus', desc: 'We understand the preferences, standards, and expectations of Dutch travelers.' },
+    { icon: <Map />, title: 'Bespoke Journeys', desc: 'Every itinerary is crafted with attention to detail and personal touch.' },
   ];
 
   return (
@@ -133,7 +153,7 @@ const About = () => {
                   y1="0"
                   x2="1.5"
                   y2="100%"
-                  stroke="#d4af37" // secondary
+                  stroke="#d4af37"
                   strokeWidth="3.5"
                   strokeDasharray="6 6"
                   style={{
@@ -172,7 +192,7 @@ const About = () => {
                         viewport={{ once: true }}
                         transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.15 }}
                         className="w-12 h-12 rounded-full bg-primary text-white border-4 border-white shadow-xl flex items-center justify-center"
-                        whileHover={{ scale: 1.15, backgroundColor: "#f26b38" }} // accent on hover
+                        whileHover={{ scale: 1.15, backgroundColor: "#f26b38" }}
                       >
                         {step.icon}
                       </motion.div>
@@ -198,12 +218,7 @@ const About = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { icon: <Leaf />, title: 'Sustainable Tourism', desc: 'We prioritize eco-friendly accommodations and respect wildlife habitats.' },
-              { icon: <Users />, title: 'Local Expertise', desc: 'Our team comprises native Sri Lankans ensuring authentic experiences.' },
-              { icon: <Heart />, title: 'Dutch Focus', desc: 'We understand the preferences, standards, and expectations of Dutch travelers.' },
-              { icon: <Map />, title: 'Bespoke Journeys', desc: 'Every itinerary is crafted with attention to detail and personal touch.' }
-            ].map((value, i) => (
+            {coreValues.map((value, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 35 }}
@@ -217,7 +232,7 @@ const About = () => {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 transition-all duration-300 group-hover:bg-primary group-hover:text-white"
                 >
-                  {React.cloneElement(value.icon, { size: 30 })}
+                  {cloneElement(value.icon as ReactElement<{ size: number }>, { size: 30 })}
                 </motion.div>
                 <h3 className="text-xl font-heading font-bold text-dark mb-3 group-hover:text-primary transition-colors">{value.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{value.desc}</p>

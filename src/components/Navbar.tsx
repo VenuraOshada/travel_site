@@ -3,9 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+interface NavLink {
+  name: string;
+  path: string;
+}
+
+const Navbar: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +22,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = [
+  const links: NavLink[] = [
     { name: 'Home', path: '/' },
     { name: 'Packages', path: '/packages' },
     { name: 'About Us', path: '/about' },
@@ -36,7 +41,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 z-50 font-heading" onClick={() => setIsMobileMenuOpen(false)}>
             {/* Logo badge with spinning hover animation like a compass */}
-            <motion.div 
+            <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shadow-lg border border-secondary/35 bg-dark"
@@ -78,7 +83,7 @@ const Navbar = () => {
                 </Link>
               );
             })}
-            
+
             {/* Book Now Button with spring hover scaling */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -130,7 +135,7 @@ const Navbar = () => {
                 </Link>
               </motion.div>
             ))}
-            <motion.div 
+            <motion.div
               className="pt-6 mt-4 border-t border-gray-100"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

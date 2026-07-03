@@ -2,7 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, MessageCircle } from 'lucide-react';
 
-const Contact = () => {
+interface ContactInfoItem {
+  icon: React.ReactElement;
+  title: string;
+  desc: React.ReactNode;
+}
+
+const Contact: React.FC = () => {
+  const contactItems: ContactInfoItem[] = [
+    { icon: <MapPin />, title: "Our Office", desc: <>123 Silk Road Ave, Colombo 03<br />Sri Lanka</> },
+    { icon: <Phone />, title: "Phone", desc: "+94 77 123 4567" },
+    { icon: <Mail />, title: "Email", desc: "hello@nordicsafari.com" },
+  ];
+
   return (
     <div className="min-h-screen bg-light pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +40,7 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          
+
           {/* Contact Form Container (Slides in from Left) */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -41,59 +53,59 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                  <motion.input 
+                  <motion.input
                     whileFocus={{ scale: 1.015, borderColor: '#153e35', boxShadow: '0 4px 20px rgba(21, 62, 53, 0.08)' }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    type="text" 
-                    className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors" 
-                    placeholder="Jan" 
+                    type="text"
+                    className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors"
+                    placeholder="Jan"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                  <motion.input 
+                  <motion.input
                     whileFocus={{ scale: 1.015, borderColor: '#153e35', boxShadow: '0 4px 20px rgba(21, 62, 53, 0.08)' }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    type="text" 
-                    className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors" 
-                    placeholder="Jansen" 
+                    type="text"
+                    className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors"
+                    placeholder="Jansen"
                   />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                <motion.input 
+                <motion.input
                   whileFocus={{ scale: 1.01, borderColor: '#153e35', boxShadow: '0 4px 20px rgba(21, 62, 53, 0.08)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  type="email" 
-                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors" 
-                  placeholder="jan@example.nl" 
+                  type="email"
+                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors"
+                  placeholder="jan@example.nl"
                 />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number (Optional)</label>
-                <motion.input 
+                <motion.input
                   whileFocus={{ scale: 1.01, borderColor: '#153e35', boxShadow: '0 4px 20px rgba(21, 62, 53, 0.08)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  type="tel" 
-                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors" 
-                  placeholder="+31 6 12345678" 
+                  type="tel"
+                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors"
+                  placeholder="+31 6 12345678"
                 />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Your Message</label>
-                <motion.textarea 
+                <motion.textarea
                   whileFocus={{ scale: 1.01, borderColor: '#153e35', boxShadow: '0 4px 20px rgba(21, 62, 53, 0.08)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors" 
-                  rows="5" 
+                  className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-primary outline-none transition-colors"
+                  rows={5}
                   placeholder="I am interested in a 10-day tour for 2 people..."
                 ></motion.textarea>
               </div>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                type="button" 
+                type="button"
                 className="w-full py-4 bg-dark hover:bg-primary text-white rounded-xl font-bold text-lg transition-colors flex justify-center items-center gap-2 shadow-lg hover:shadow-xl cursor-pointer"
               >
                 Send Message <Send size={20} />
@@ -111,12 +123,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-heading font-bold text-dark mb-6">Contact Information</h3>
               <div className="space-y-6">
-                {[
-                  { icon: <MapPin />, title: "Our Office", desc: <>123 Silk Road Ave, Colombo 03<br />Sri Lanka</> },
-                  { icon: <Phone />, title: "Phone", desc: "+94 77 123 4567" },
-                  { icon: <Mail />, title: "Email", desc: "hello@nordicsafari.com" }
-                ].map((item, idx) => (
-                  <motion.div 
+                {contactItems.map((item, idx) => (
+                  <motion.div
                     key={idx}
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -139,12 +147,12 @@ const Contact = () => {
               <div className="flex items-center gap-4 mb-4">
                 {/* Custom glowing pulse wrapper */}
                 <div className="relative w-12 h-12 shrink-0">
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.7, 1], opacity: [0.6, 0, 0.6] }}
                     transition={{ repeat: Infinity, duration: 2.2, ease: "easeOut" }}
                     className="absolute inset-0 bg-[#25D366] rounded-full z-0"
                   />
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.35, 1], opacity: [0.8, 0, 0.8] }}
                     transition={{ repeat: Infinity, duration: 2.2, ease: "easeOut", delay: 0.7 }}
                     className="absolute inset-0 bg-[#25D366] rounded-full z-0"
@@ -156,13 +164,13 @@ const Contact = () => {
                 <h3 className="text-2xl font-heading font-bold text-dark">Chat on WhatsApp</h3>
               </div>
               <p className="text-gray-600 mb-6 relative z-10">Get an immediate response from our travel experts. We're online and ready to help.</p>
-              
-              <motion.a 
+
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://wa.me/94771234567" 
-                target="_blank" 
-                rel="noreferrer" 
+                href="https://wa.me/94771234567"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#1ebd5c] text-white font-bold rounded-full transition-colors shadow-lg shadow-[#25D366]/30 relative z-10"
               >
                 Start Chat
@@ -170,7 +178,7 @@ const Contact = () => {
             </div>
 
             {/* Map Placeholder with slow parallax zoom hover */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.4 }}
               className="w-full h-64 bg-gray-200 rounded-3xl overflow-hidden relative border border-gray-100 flex-grow cursor-pointer"

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Map, Compass, Shield, Heart, Coffee, UserCheck, Star, ArrowRight, Clock } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,28 +8,70 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards';
 
-// 3D Card Tilt Component for premium hover feel
-const TiltCard = ({ children, className, cursorType = "explore" }) => {
-  const cardRef = useRef(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface TiltCardProps {
+  children: React.ReactNode;
+  className?: string;
+  cursorType?: string;
+}
 
-  const handleMouseMove = (e) => {
+interface ImageRevealProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+interface Feature {
+  icon: React.ReactElement;
+  title: string;
+  desc: string;
+}
+
+interface Destination {
+  name: string;
+  image: string;
+  desc: string;
+}
+
+interface Package {
+  title: string;
+  days: string;
+  price: string;
+  highlight: string;
+  img: string;
+}
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  location: string;
+  image: string;
+}
+
+// ── Sub-components ─────────────────────────────────────────────────────────────
+
+// 3D Card Tilt Component for premium hover feel
+const TiltCard: React.FC<TiltCardProps> = ({ children, className, cursorType = "explore" }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotateX, setRotateX] = useState<number>(0);
+  const [rotateY, setRotateY] = useState<number>(0);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
-    
+
     // Mouse coords relative to card center (-0.5 to 0.5)
     const mouseX = e.clientX - rect.left - width / 2;
     const mouseY = e.clientY - rect.top - height / 2;
-    
-    // Max 10 degrees tilt
+
+    // Max 12 degrees tilt
     const rX = -(mouseY / height) * 12;
     const rY = (mouseX / width) * 12;
-    
+
     setRotateX(rX);
     setRotateY(rY);
   };
@@ -68,7 +110,7 @@ const TiltCard = ({ children, className, cursorType = "explore" }) => {
 };
 
 // Elegant Curtain Image Reveal on scroll
-const ImageReveal = ({ src, alt, className }) => {
+const ImageReveal: React.FC<ImageRevealProps> = ({ src, alt, className }) => {
   return (
     <div className="relative overflow-hidden w-full h-full">
       <motion.div
@@ -92,21 +134,23 @@ const ImageReveal = ({ src, alt, className }) => {
   );
 };
 
-const Home = () => {
+// ── Page ───────────────────────────────────────────────────────────────────────
+
+const Home: React.FC = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 300]);
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
-  const features = [
+  const features: Feature[] = [
     { icon: <Map className="w-8 h-8 text-accent" />, title: 'Personalized Tours', desc: 'Custom itineraries tailored to your unique preferences.' },
     { icon: <Heart className="w-8 h-8 text-accent" />, title: 'Dutch-Friendly Service', desc: 'Seamless communication and expectations met.' },
     { icon: <UserCheck className="w-8 h-8 text-accent" />, title: 'Local Expert Guides', desc: 'Discover hidden gems with native Sri Lankan experts.' },
     { icon: <Shield className="w-8 h-8 text-accent" />, title: 'Safe & Comfortable Travel', desc: 'Premium vehicles and verified accommodations.' },
     { icon: <Coffee className="w-8 h-8 text-accent" />, title: 'Luxury & Budget Options', desc: 'Experiences crafted for various budgets without compromising quality.' },
-    { icon: <Compass className="w-8 h-8 text-accent" />, title: 'Cultural Experiences', desc: 'Authentic immersion into Sri Lanka\'s rich heritage.' },
+    { icon: <Compass className="w-8 h-8 text-accent" />, title: 'Cultural Experiences', desc: "Authentic immersion into Sri Lanka's rich heritage." },
   ];
 
-  const destinations = [
+  const destinations: Destination[] = [
     { name: 'Sigiriya', image: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=800', desc: 'Ancient rock fortress and palace ruin.' },
     { name: 'Ella', image: 'https://images.unsplash.com/photo-1576671414121-3183aa178e22?q=80&w=800', desc: 'Lush green tea plantations and scenic views.' },
     { name: 'Mirissa', image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800', desc: 'Pristine beaches and whale watching.' },
@@ -115,13 +159,13 @@ const Home = () => {
     { name: 'Yala Safari', image: 'https://images.unsplash.com/photo-1544605929-3738fb87e220?q=80&w=800', desc: 'Wildlife adventure with leopards and elephants.' },
   ];
 
-  const packages = [
+  const packages: Package[] = [
     { title: '7-Day Cultural Escape', days: '7 Days', price: '€899', highlight: 'Temples, Heritage & History', img: 'https://images.unsplash.com/photo-1588611849174-8ba6438dc20f?q=80&w=800' },
     { title: '10-Day Tropical Adventure', days: '10 Days', price: '€1,299', highlight: 'Beaches, Safari & Mountains', img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800' },
     { title: 'Luxury Honeymoon Tour', days: '14 Days', price: '€2,499', highlight: 'Private Villas, Romantic Dinners', img: 'https://images.unsplash.com/photo-1574686008677-22d733db9b3d?q=80&w=800' },
   ];
 
-  const testimonials = [
+  const testimonials: Testimonial[] = [
     {
       quote: "An absolutely unforgettable journey! The team at Nordic Safari understood exactly what we wanted as Dutch travelers. The hotels were premium, and our guide was exceptional.",
       name: "Jan & Sophie",
@@ -158,7 +202,7 @@ const Home = () => {
   const titleWords1 = "Discover Sri Lanka With".split(" ");
   const titleWords2 = "Nordic Safari On Silk Road".split(" ");
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -168,12 +212,12 @@ const Home = () => {
     }
   };
 
-  const wordVariants = {
+  const wordVariants: Variants = {
     hidden: { y: "100%", opacity: 0 },
-    visible: { 
-      y: 0, 
+    visible: {
+      y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 100, damping: 15 } 
+      transition: { type: "spring", stiffness: 100, damping: 15 }
     }
   };
 
@@ -183,15 +227,15 @@ const Home = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: y1 }} className="absolute inset-0 w-full h-full z-0">
           <div className="absolute inset-0 bg-dark/40 z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=2000&auto=format&fit=crop" 
-            alt="Sri Lanka landscape" 
+          <img
+            src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=2000&auto=format&fit=crop"
+            alt="Sri Lanka landscape"
             className="w-full h-full object-cover scale-105"
           />
         </motion.div>
-        
+
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-          <motion.h1 
+          <motion.h1
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -214,8 +258,8 @@ const Home = () => {
               </span>
             </div>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
@@ -223,8 +267,8 @@ const Home = () => {
           >
             Luxury journeys, authentic experiences, and unforgettable adventures crafted for travelers from the Netherlands.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.0, ease: "easeOut" }}
@@ -239,7 +283,7 @@ const Home = () => {
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           style={{ opacity }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
         >
@@ -257,7 +301,7 @@ const Home = () => {
       <section className="py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -267,7 +311,7 @@ const Home = () => {
             </motion.h2>
             <div className="w-24 h-1 bg-accent mx-auto rounded-full"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
@@ -294,7 +338,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -340,7 +384,7 @@ const Home = () => {
       <section className="py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -381,7 +425,7 @@ const Home = () => {
               </TiltCard>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/packages" className="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors text-lg">
               View All Packages <ArrowRight size={20} />
@@ -400,7 +444,7 @@ const Home = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -426,14 +470,14 @@ const Home = () => {
                   <div className="flex flex-col md:flex-row h-full">
                     {/* Left side: Actual traveler trip photo */}
                     <div className="w-full md:w-5/12 h-60 md:h-[400px] relative overflow-hidden shrink-0">
-                      <img 
-                        src={item.image} 
-                        alt={`Review photo by ${item.name}`} 
+                      <img
+                        src={item.image}
+                        alt={`Review photo by ${item.name}`}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-dark/50 z-10"></div>
                     </div>
-                    
+
                     {/* Right side: Star reviews and testimonials text */}
                     <div className="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-between">
                       <div>
@@ -448,7 +492,7 @@ const Home = () => {
                           "{item.quote}"
                         </p>
                       </div>
-                      
+
                       <div className="flex items-center gap-4 border-t border-white/10 pt-4 mt-auto">
                         <div>
                           <h4 className="font-bold text-lg text-secondary">{item.name}</h4>

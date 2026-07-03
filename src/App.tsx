@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, FC, ReactNode } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Lenis from 'lenis';
@@ -10,8 +10,13 @@ import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 
+
+interface PageTransitionProps {
+  children: ReactNode;
+}
+
 // Custom Wrapper for page fade-in/out transitions
-export const PageTransition = ({ children }) => {
+export const PageTransition: FC<PageTransitionProps> = ({ children }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -33,8 +38,8 @@ function AnimatedAppContent() {
       <AnimatePresence mode="wait" onExitComplete={() => {
         // Reset scroll position and resize Lenis on route change
         window.scrollTo(0, 0);
-        if (window.lenis) {
-          window.lenis.resize();
+        if ((window as any).lenis) {
+          (window as any).lenis.resize();
         }
       }}>
         <Routes location={location} key={location.pathname}>
@@ -52,19 +57,19 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      syncTouch: false,
       touchMultiplier: 2,
       infinite: false,
     });
-    
-    window.lenis = lenis;
 
-    function raf(time) {
+    (window as any).lenis = lenis;
+
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
@@ -73,7 +78,7 @@ function App() {
 
     return () => {
       lenis.destroy();
-      delete window.lenis;
+      delete (window as any).lenis;
     };
   }, []);
 

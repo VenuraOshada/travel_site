@@ -1,20 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState, FC } from 'react';
+import { motion, useMotionValue, useSpring, TargetAndTransition } from 'framer-motion';
 
-const CustomCursor = () => {
-  const [cursorType, setCursorType] = useState('default');
-  const [cursorText, setCursorText] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-  
+type CursorType = 'default' | 'pointer' | 'explore' | 'drag';
+
+interface SpringConfig {
+  damping: number;
+  stiffness: number;
+  mass: number;
+}
+
+
+
+const CustomCursor: FC = () => {
+  const [cursorType, setCursorType] = useState<CursorType>('default');
+  const [cursorText, setCursorText] = useState<string>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   // Spring configurations for smooth delay
-  const springConfig = { damping: 30, stiffness: 350, mass: 0.5 };
+  const springConfig: SpringConfig = { damping: 30, stiffness: 350, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
-  
+
   useEffect(() => {
     // Show only on desktop screen sizes
     const checkViewport = () => {
@@ -24,31 +34,31 @@ const CustomCursor = () => {
         setIsVisible(false);
       }
     };
-    
+
     checkViewport();
     window.addEventListener('resize', checkViewport);
-    
-    const moveCursor = (e) => {
+
+    const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
-    
+
     const handleMouseDown = () => setIsClicked(true);
     const handleMouseUp = () => setIsClicked(false);
-    
+
     window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
-    
-    const handleMouseOver = (e) => {
-      const target = e.target;
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as Element | null;
       if (!target) return;
-      
+
       const interactiveEl = target.closest('a, button, select, input, textarea, [role="button"], [data-cursor]');
       if (interactiveEl) {
         const cursorData = interactiveEl.getAttribute('data-cursor');
         if (cursorData) {
-          setCursorType(cursorData);
+          setCursorType(cursorData as CursorType);
           if (cursorData === 'explore') {
             setCursorText('EXPLORE');
           } else if (cursorData === 'drag') {
@@ -65,9 +75,9 @@ const CustomCursor = () => {
         setCursorText('');
       }
     };
-    
+
     window.addEventListener('mouseover', handleMouseOver);
-    
+
     return () => {
       window.removeEventListener('resize', checkViewport);
       window.removeEventListener('mousemove', moveCursor);
@@ -80,7 +90,7 @@ const CustomCursor = () => {
   if (!isVisible) return null;
 
   // Styles dynamic updates
-  const getVariants = () => {
+  const getVariants = (): TargetAndTransition => {
     const scaleFactor = isClicked ? 0.8 : 1;
     switch (cursorType) {
       case 'explore':
@@ -128,7 +138,7 @@ const CustomCursor = () => {
           y: cursorY,
         }}
       />
-      
+
       {/* Outer Spring Ring */}
       <motion.div
         className="fixed top-0 left-0 rounded-full z-[9998] pointer-events-none -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-[10px] font-bold text-white tracking-widest overflow-hidden hidden lg:flex"

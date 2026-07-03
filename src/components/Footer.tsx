@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-dark text-light pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +18,7 @@ const Footer = () => {
               Luxury journeys, authentic experiences, and unforgettable adventures crafted for travelers from the Netherlands. Explore Sri Lanka With Us.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-heading font-semibold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
@@ -62,7 +62,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-16 pt-8 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} Nordic Safari On Silk Road. All rights reserved.</p>
           <div className="space-x-4">

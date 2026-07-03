@@ -1,11 +1,35 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, MapPin, Star, Check, Calendar, Users, Camera, Waves, Tent } from 'lucide-react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { Clock, MapPin, Star, Check } from 'lucide-react';
 
-const Packages = () => {
-  const [activeTab, setActiveTab] = useState('curated');
+// ── Types ─────────────────────────────────────────────────────────────────────
+type ActiveTab = 'curated' | 'custom';
+type HotelCategory = 'Budget' | 'Standard' | 'Luxury';
 
-  const packages = [
+interface Package {
+  id: number;
+  title: string;
+  duration: string;
+  locations: string;
+  highlights: string[];
+  image: string;
+  price: string;
+}
+
+interface CustomForm {
+  days: number;
+  travelers: number;
+  hotelCategory: HotelCategory;
+  transport: string;
+  destinations: string[];
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
+const Packages: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<ActiveTab>('curated');
+
+  const packages: Package[] = [
     {
       id: 1,
       title: '7 Days Sri Lanka Explorer',
@@ -44,7 +68,7 @@ const Packages = () => {
     }
   ];
 
-  const [customForm, setCustomForm] = useState({
+  const [customForm, setCustomForm] = useState<CustomForm>({
     days: 7,
     travelers: 2,
     hotelCategory: 'Standard',
@@ -52,7 +76,7 @@ const Packages = () => {
     destinations: [],
   });
 
-  const toggleDestination = (dest) => {
+  const toggleDestination = (dest: string) => {
     setCustomForm(prev => ({
       ...prev,
       destinations: prev.destinations.includes(dest)
@@ -61,10 +85,10 @@ const Packages = () => {
     }));
   };
 
-  const allDestinations = ['Cultural Triangle', 'Kandy & Hill Country', 'East Coast Beaches', 'South Coast Beaches', 'Wildlife Parks', 'Northern Region'];
+  const allDestinations: string[] = ['Cultural Triangle', 'Kandy & Hill Country', 'East Coast Beaches', 'South Coast Beaches', 'Wildlife Parks', 'Northern Region'];
 
   // Framer Motion staggered grid definitions
-  const gridVariants = {
+  const gridVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -73,7 +97,7 @@ const Packages = () => {
     }
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -192,7 +216,7 @@ const Packages = () => {
                       whileTap={{ scale: 0.98 }}
                       className="w-full py-4 bg-dark hover:bg-accent text-white rounded-xl font-medium transition-colors shadow-md hover:shadow-xl cursor-pointer"
                     >
-                      View Itinerary & Book
+                      View Itinerary &amp; Book
                     </motion.button>
                   </div>
                 </motion.div>
@@ -285,7 +309,7 @@ const Packages = () => {
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-3">Accommodation Style</label>
                       <div className="grid grid-cols-3 gap-3">
-                        {['Budget', 'Standard', 'Luxury'].map((cat) => (
+                        {(['Budget', 'Standard', 'Luxury'] as HotelCategory[]).map((cat) => (
                           <motion.button
                             key={cat}
                             whileHover={{ scale: 1.02 }}
@@ -307,7 +331,7 @@ const Packages = () => {
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Special Requests / Interests</label>
                       <textarea
                         className="w-full p-4 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
-                        rows="4"
+                        rows={4}
                         placeholder="Tell us about any specific activities (e.g., surfing, cooking classes) or dietary requirements..."
                       ></textarea>
                     </div>
@@ -327,7 +351,9 @@ const Packages = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-accent"><Users size={20} /></div>
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-accent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      </div>
                       <div>
                         <p className="text-sm text-gray-400">Travelers</p>
                         <p className="font-semibold">{customForm.travelers} Persons</p>
