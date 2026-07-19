@@ -10,9 +10,9 @@ interface ContactInfoItem {
 
 const Contact: React.FC = () => {
   const contactItems: ContactInfoItem[] = [
-    { icon: <MapPin />, title: "Our Office", desc: <>123 Silk Road Ave, Colombo 03<br />Sri Lanka</> },
-    { icon: <Phone />, title: "Phone", desc: "+94 77 123 4567" },
-    { icon: <Mail />, title: "Email", desc: "hello@nordicsafari.com" },
+    { icon: <MapPin />, title: "Our Office", desc: <>Burglaan 39, 7314 BK<br />Apeldoorn, NL</> },
+    { icon: <Phone />, title: "Phone", desc: "+31 649 923 717" },
+    { icon: <Mail />, title: "Email", desc: "nordicsafarionsilkroad@gmail.com" },
   ];
 
   return (

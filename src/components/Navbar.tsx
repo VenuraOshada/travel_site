@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shadow-lg border border-secondary/35 bg-dark"
             >
-              <img src="/logo.png" alt="NSSR Logo" className="w-full h-full object-cover" />
+              <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.30808-1/437909289_122105267456282239_507834279489120834_n.jpg?stp=c96.143.882.882a_dst-jpg_tt6&cstp=mx882x882&ctp=s480x480&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=Gb_81HrfrRkQ7kNvwEQcoIa&_nc_oc=AdrIKw93GhNptLmksI9ey3HRA9jcpyRwthutjJDEWQIDAZ44UI1VY8mOvj7Wm6_FY4o&_nc_zt=24&_nc_ht=scontent-ams2-1.xx&_nc_gid=aMwyCutimUwBj3FYuPDSCw&_nc_ss=7b2a8&oh=00_AQBhh63VOgaie4Mmube7K8JbZ5Rum6EdRvvo2bjtXVPzFw&oe=6A5E99CD" alt="NSSR Logo" className="w-full h-full object-cover" />
             </motion.div>
             <span className={`font-heading font-bold text-xl tracking-tight transition-colors duration-300 ${shouldBeSolid ? 'text-dark' : 'text-white drop-shadow-md'}`}>
               Nordic Safari

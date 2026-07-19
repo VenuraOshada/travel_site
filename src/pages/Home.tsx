@@ -160,9 +160,9 @@ const Home: React.FC = () => {
   ];
 
   const packages: Package[] = [
-    { title: '7-Day Cultural Escape', days: '7 Days', price: '€899', highlight: 'Temples, Heritage & History', img: 'https://images.unsplash.com/photo-1588611849174-8ba6438dc20f?q=80&w=800' },
-    { title: '10-Day Tropical Adventure', days: '10 Days', price: '€1,299', highlight: 'Beaches, Safari & Mountains', img: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800' },
-    { title: 'Luxury Honeymoon Tour', days: '14 Days', price: '€2,499', highlight: 'Private Villas, Romantic Dinners', img: 'https://images.unsplash.com/photo-1574686008677-22d733db9b3d?q=80&w=800' },
+    { title: '7-Day Cultural Escape', days: '7 Days', price: '€899', highlight: 'Temples, Heritage & History', img: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?q=80&w=800' },
+    { title: '10-Day Tropical Adventure', days: '10 Days', price: '€1,299', highlight: 'Beaches, Safari & Mountains', img: 'https://images.unsplash.com/photo-1544605929-3738fb87e220?q=80&w=800' },
+    { title: 'Luxury Honeymoon Tour', days: '14 Days', price: '€2,499', highlight: 'Private Villas, Romantic Dinners', img: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=800' },
   ];
 
   const testimonials: Testimonial[] = [
